@@ -33,4 +33,8 @@ public class ProductoService {
     public List<Producto> buscarPorNombre(String nombre) {
         return repo.findByNombreContainingIgnoreCase(nombre);
     }
+
+    public List<Producto> buscarPorCategoria(String categoria) {
+        return repo.findByCategoriaIgnoreCase(categoria);
+    }
 }

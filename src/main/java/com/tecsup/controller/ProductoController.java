@@ -39,6 +39,12 @@ public class ProductoController {
         return ResponseEntity.ok(service.buscarPorNombre(nombre));
     }
 
+    // GET /api/productos/categoria/{categoria}
+    @GetMapping("/categoria/{categoria}")
+    public ResponseEntity<List<Producto>> buscarPorCategoria(@PathVariable String categoria) {
+        return ResponseEntity.ok(service.buscarPorCategoria(categoria));
+    }
+
     // POST /api/productos
     @PostMapping
     public ResponseEntity<?> guardar(@Valid @RequestBody ProductoDTO dto) {
