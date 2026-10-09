@@ -42,4 +42,15 @@ class ProductoFeaturesIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)));
     }
+
+    @Test
+    void listarProductosBajoStock() throws Exception {
+        crear("Teclado", 80, 3, "Tecnologia");
+        crear("Monitor", 900, 50, "Tecnologia");
+
+        mockMvc.perform(get("/api/productos/bajo-stock").param("minimo", "5"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].nombre").value("Teclado"));
+    }
 }

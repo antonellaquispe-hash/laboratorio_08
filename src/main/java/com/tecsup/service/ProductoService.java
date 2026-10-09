@@ -37,4 +37,8 @@ public class ProductoService {
     public List<Producto> buscarPorCategoria(String categoria) {
         return repo.findByCategoriaIgnoreCase(categoria);
     }
+
+    public List<Producto> listarBajoStock(int minimo) {
+        return repo.findByStockLessThanEqual(minimo);
+    }
 }
