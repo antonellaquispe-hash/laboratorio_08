@@ -41,4 +41,8 @@ public class ProductoService {
     public List<Producto> listarBajoStock(int minimo) {
         return repo.findByStockLessThanEqual(minimo);
     }
+
+    public List<Producto> buscarPorRangoPrecio(double min, double max) {
+        return repo.findByPrecioBetween(min, max);
+    }
 }

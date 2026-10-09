@@ -53,4 +53,17 @@ class ProductoFeaturesIntegrationTest {
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].nombre").value("Teclado"));
     }
+
+    @Test
+    void buscarPorRangoDePrecio() throws Exception {
+        crear("Cable", 10, 200, "Accesorios");
+        crear("Laptop", 3000, 10, "Tecnologia");
+
+        mockMvc.perform(get("/api/productos/precio")
+                        .param("min", "5")
+                        .param("max", "100"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].nombre").value("Cable"));
+    }
 }

@@ -52,6 +52,13 @@ public class ProductoController {
         return ResponseEntity.ok(service.listarBajoStock(minimo));
     }
 
+    // GET /api/productos/precio?min=10&max=100
+    @GetMapping("/precio")
+    public ResponseEntity<List<Producto>> porRangoPrecio(
+            @RequestParam double min, @RequestParam double max) {
+        return ResponseEntity.ok(service.buscarPorRangoPrecio(min, max));
+    }
+
     // POST /api/productos
     @PostMapping
     public ResponseEntity<?> guardar(@Valid @RequestBody ProductoDTO dto) {
