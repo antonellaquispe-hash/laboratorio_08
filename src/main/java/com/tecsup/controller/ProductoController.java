@@ -85,15 +85,16 @@ public class ProductoController {
     @PutMapping("/{id}")
     public ResponseEntity<?> actualizar(@PathVariable Long id,
                                         @Valid @RequestBody ProductoDTO dto) {
-        Producto existente = service.obtener(id);
-        if (existente == null) {
+        Producto datos = new Producto();
+        datos.setNombre(dto.getNombre());
+        datos.setPrecio(dto.getPrecio());
+        datos.setStock(dto.getStock());
+        datos.setCategoria(dto.getCategoria());
+        Producto actualizado = service.actualizar(id, datos);
+        if (actualizado == null) {
             return ResponseEntity.status(404).body("Producto no existe");
         }
-        existente.setNombre(dto.getNombre());
-        existente.setPrecio(dto.getPrecio());
-        existente.setStock(dto.getStock());
-        existente.setCategoria(dto.getCategoria());
-        return ResponseEntity.ok(service.guardar(existente));
+        return ResponseEntity.ok(actualizado);
     }
 
     // DELETE /api/productos/{id}

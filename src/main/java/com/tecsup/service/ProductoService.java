@@ -30,6 +30,18 @@ public class ProductoService {
         repo.deleteById(id);
     }
 
+    public Producto actualizar(Long id, Producto p) {
+        Producto existente = repo.findById(id).orElse(null);
+        if (existente == null) {
+            return null;
+        }
+        existente.setNombre(p.getNombre());
+        existente.setPrecio(p.getPrecio());
+        existente.setStock(p.getStock());
+        existente.setCategoria(p.getCategoria());
+        return repo.save(existente);
+    }
+
     public List<Producto> buscarPorNombre(String nombre) {
         return repo.findByNombreContainingIgnoreCase(nombre);
     }
